@@ -18,12 +18,12 @@ public class GameDaoImpl implements GameDao{
 
         PreparedStatement stmt = null;
 
-        String sql = "insert into tb_games (" +
+        String sql = "insert into TB_GAMES_JAVA (" +
                 "game_id, titulo, estudio, ano_lancamento, finalizado) " +
-                "values (seq_games.nextval, ?, ?, ?, ?)";
+                "values (SEQ_GAMES.nextval, ?, ?, ?, ?)";
 
-        try{
-//            stmt = conn.prepareStatement(sql);
+        try {
+            stmt = conn.prepareStatement(sql);
             stmt.setString(1, game.getTitulo());
             stmt.setString(2, game.getEstudio());
             stmt.setInt(3, game.getAnoLancamento());
@@ -36,7 +36,7 @@ public class GameDaoImpl implements GameDao{
         } finally {
             try {
                 stmt.close();
-//                conn.close();
+                conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -60,7 +60,7 @@ public class GameDaoImpl implements GameDao{
         List<Game> games = new ArrayList<>();
 
         try {
-//            stmt = conn.prepareStatement(sql);
+            stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -80,5 +80,22 @@ public class GameDaoImpl implements GameDao{
             e.printStackTrace();
         }
         return games;
+    }
+
+    public void delete(Game game) {
+        Connection conn = ConnectionManager.getConnection();
+
+        String sql = "DELETE FROM tb_games WHERE game_id = ?";
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, game.getGameId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

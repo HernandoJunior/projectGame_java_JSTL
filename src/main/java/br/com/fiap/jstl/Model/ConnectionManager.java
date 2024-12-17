@@ -7,13 +7,14 @@ import java.sql.SQLException;
 public class ConnectionManager {
 
     private static Connection connection = null;
-    public static final String URL = "jdbc:oracle:thin:@192.168.1.103:1521:xe";
-    public static final String USER = "system";
-    public static final String PASSWORD = "12345678";
+    public static final String URL = "jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl";
+    public static final String USER = "rm557700";
+    public static final String PASSWORD = "220497";
 
     public static Connection getConnection() {
 
         try{
+            // Solicitamos a conexão atraves do diver.
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
