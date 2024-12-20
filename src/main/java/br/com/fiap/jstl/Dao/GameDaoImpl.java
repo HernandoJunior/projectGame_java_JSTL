@@ -56,7 +56,7 @@ public class GameDaoImpl implements GameDao{
 
         PreparedStatement stmt = null;
 
-        String sql = "SELECT * FROM tb_games ORDER BY TITULO ASC";
+        String sql = "SELECT * FROM TB_GAMES_JAVA ORDER BY TITULO ASC";
         List<Game> games = new ArrayList<>();
 
         try {
@@ -66,11 +66,11 @@ public class GameDaoImpl implements GameDao{
             while (rs.next()) {
                 Game game = new Game();
 
-                game.setGameId(rs.getInt("game_id"));
-                game.setTitulo(rs.getString("titulo"));
-                game.setEstudio(rs.getString("estudio"));
-                game.setAnoLancamento(rs.getInt("ano_lancamento"));
-                game.setFinalizado(rs.getBoolean("finalizado"));
+                game.setGameId(rs.getInt("GAME_ID"));
+                game.setTitulo(rs.getString("TITULO"));
+                game.setEstudio(rs.getString("ESTUDIO"));
+                game.setAnoLancamento(rs.getInt("ANO_LANCAMENTO"));
+                game.setFinalizado(rs.getBoolean("FINALIZADO"));
 
                 games.add(game);
 
@@ -82,20 +82,29 @@ public class GameDaoImpl implements GameDao{
         return games;
     }
 
+    @Override
     public void delete(Game game) {
         Connection conn = ConnectionManager.getConnection();
 
-        String sql = "DELETE FROM tb_games WHERE game_id = ?";
-
         PreparedStatement stmt = null;
+
+        String sql = "DELETE FROM TB_GAMES_JAVA WHERE GAME_ID = ?";
+
 
         try {
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, game.getGameId());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 }

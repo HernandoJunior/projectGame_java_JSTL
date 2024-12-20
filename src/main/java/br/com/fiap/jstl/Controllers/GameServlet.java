@@ -31,8 +31,6 @@ public class GameServlet extends HttpServlet {
             finalizadoBoolean = true;
         }
 
-        System.out.println(finalizado);
-
         // Criação de um objeto com os dados do form
         Game game = new Game();
         game.setTitulo(titulo);
@@ -52,10 +50,11 @@ public class GameServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Game> games = new ArrayList<>();
         GameDaoImpl gameDao = new GameDaoImpl();
-        games = gameDao.findAll();
+        List<Game> games = gameDao.findAll();
+
+
         req.setAttribute("games", games);
-        req.getRequestDispatcher("game").forward(req, resp);
+        req.getRequestDispatcher("/menu.jsp").forward(req, resp);
     }
 }

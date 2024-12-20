@@ -10,7 +10,7 @@
                     <a class="nav-link" aria-current="page" href="cadastrar-game.jsp">Cadastrar Game</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="menu.jsp">Lista de Games</a>
+                    <a class="nav-link" href="gameSave">Lista de Games</a>
                 </li>
             </ul>
         </div>

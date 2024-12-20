@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./resources/CSS/bootstrap.css">
 </head>
 <body>
+<%@include file="header.jsp"%>
 <div class="container">
     <div class="mt-5 ms-5 me-5">
 
@@ -36,12 +37,26 @@
                     </thead>
                     <tbody>
 
-                    <c:forEach items="${games}" var="game">
+                    <c:forEach items="${games}" var="game" >
                         <tr>
                             <td>${game.titulo}</td>
                             <td class="text-start">${game.estudio}</td>
                             <td class="text-center">${game.anoLancamento}</td>
-                            <td class="text-center"><input type="checkbox" checked="checked" disabled="disabled"></td>
+                            <td class="text-center">
+                                <c:choose>
+                                    <c:when test="${game.finalizado}">
+                                        <input type="checkbox" checked="checked" disabled="disabled"/>
+                                    </c:when>
+                                    <c:when test="${!game.finalizado}">
+                                        <input type="checkbox" checked="checked" disabled="disabled"/>
+                                    </c:when>
+                                </c:choose>
+                            </td>
+                            <td class="text-center">
+                                <a href="" style="text-decoration:none;">
+                                    <i class="bi bi-x-lg"></i>
+                                </a>
+                            </td>
                         </tr>
                     </c:forEach>
 
