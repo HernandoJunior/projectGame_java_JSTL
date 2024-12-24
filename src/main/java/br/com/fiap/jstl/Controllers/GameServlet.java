@@ -3,7 +3,6 @@ package br.com.fiap.jstl.Controllers;
 import br.com.fiap.jstl.Dao.Game;
 import br.com.fiap.jstl.Dao.GameDaoImpl;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,9 +49,9 @@ public class GameServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         GameDaoImpl gameDao = new GameDaoImpl();
         List<Game> games = gameDao.findAll();
-
 
         req.setAttribute("games", games);
         req.getRequestDispatcher("/menu.jsp").forward(req, resp);

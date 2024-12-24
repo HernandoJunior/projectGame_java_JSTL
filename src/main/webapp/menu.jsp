@@ -53,9 +53,9 @@
                                 </c:choose>
                             </td>
                             <td class="text-center">
-                                <a href="" style="text-decoration:none;">
-                                    <i class="bi bi-x-lg"></i>
-                                </a>
+                                    <a href="deleteGame" alt="Excluir" class="btn-delete">Excluir</a>
+<%--                                        <i class="bi bi-x"></i>--%>
+                                    </a>
                             </td>
                         </tr>
                     </c:forEach>

@@ -1,7 +1,11 @@
 package br.com.fiap.jstl.Dao;
 
 import br.com.fiap.jstl.Model.ConnectionManager;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameDaoImpl implements GameDao{
+public class GameDaoImpl implements GameDao {
 
     @Override
     public void save(Game game) {
@@ -41,7 +45,6 @@ public class GameDaoImpl implements GameDao{
                 e.printStackTrace();
             }
         }
-
     }
 
     @Override
@@ -86,13 +89,13 @@ public class GameDaoImpl implements GameDao{
     public void delete(Game game) {
         Connection conn = ConnectionManager.getConnection();
 
-        PreparedStatement stmt = null;
-
         String sql = "DELETE FROM TB_GAMES_JAVA WHERE GAME_ID = ?";
 
+        PreparedStatement stmt = null;
 
         try {
             stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, game.getGameId());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -105,6 +108,7 @@ public class GameDaoImpl implements GameDao{
                 e.printStackTrace();
             }
         }
-
     }
 }
+
+
